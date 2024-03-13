@@ -1,0 +1,26 @@
+.titleHistoryTransaction {
+    max-width: 70vw;
+    margin: auto !important;
+    margin-top: 100px !important;
+    margin-bottom: 20px !important;
+    color: black;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.tableTransaction {
+    max-width: 70vw;
+    margin: auto !important;
+    text-align: center !important;
+}
+
+
+#modalDetailTransaction {
+    margin: auto !important;
+}
+
+@media (max-width: 765px) {
+    .titleHistoryTransaction, .tableTransaction {
+        max-width: 90vw !important;
+    }
+}
