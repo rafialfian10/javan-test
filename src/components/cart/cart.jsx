@@ -24,12 +24,14 @@ const Cart = ({ cartsData }) => {
   };
 
   const handleIncrement = ({ id, note }) => {
-    // if (quantities[id] < note) {
+    console.log("data qty :",quantities[id]);
+    console.log("note :", note);
+    if (quantities[id] === undefined || quantities[id] < note) {
     setQuantities((prevQuantities) => ({
       ...prevQuantities,
       [id]: (prevQuantities[id] || 0) + 1,
     }));
-    // }
+    }
   };
 
   const calculateTotalPrice = () => {
