@@ -49,7 +49,7 @@ const TableDatas = () => {
                 <td style={{ textAlign: "start", verticalAlign: "middle" }}>
                   {transaction?.items.map((item, index) => (
                     <p key={index} className="d-inline">
-                      {item?.title} ({item?.quantity}),{" "}
+                      {item?.quantity !== 0 ? `${item.title} (${item.quantity}), ` : ""}
                     </p>
                   ))}
                 </td>
