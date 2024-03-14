@@ -1,34 +1,37 @@
-import { useState } from "react";
 import { Button, Card, Col, Row } from "react-bootstrap";
 import { Trash, Heart, HeartFill } from "react-bootstrap-icons";
 import { useDispatch } from "react-redux";
-import { FunctionDeleteCart, FunctionUpdateCart } from "../../redux/features/CartSlice";
+import {
+  FunctionDeleteCart,
+  FunctionGetCarts,
+  FunctionUpdateCart,
+} from "../../redux/features/CartSlice";
 import "./cartItem.scss";
 
 const CartItem = ({ item, quantities, handleIncrement, handleDecrement }) => {
   const dispatch = useDispatch();
-  const [wishlistStatus, setWishlistStatus] = useState(item?.wishlist);
 
   const formattedPrice = `$${(
     item?.price * (quantities[item?.id] || 0)
   ).toFixed(2)}`;
 
-  const handleWishlist = async ({id}) => {
+  const handleWishlist = async ({ id }) => {
     try {
       await dispatch(FunctionUpdateCart(id));
-      setWishlistStatus(!wishlistStatus);
+      dispatch(FunctionGetCarts());
     } catch (error) {
       console.error("Failed to update wishlist:", error);
     }
-  }
+  };
 
-  const handleDeleteCart = async ({id}) => {
+  const handleDeleteCart = async ({ id }) => {
     try {
       await dispatch(FunctionDeleteCart(id));
+      dispatch(FunctionGetCarts());
     } catch (error) {
       console.error("Failed to delete cart:", error);
     }
-  }
+  };
 
   return (
     <Row className="mb-4">
@@ -50,7 +53,7 @@ const CartItem = ({ item, quantities, handleIncrement, handleDecrement }) => {
             <Col xs={6} md={6} xl={4} className="btnCart">
               <Button
                 className="btnMinus"
-                onClick={() => handleDecrement({id: item?.id})}
+                onClick={() => handleDecrement({ id: item?.id })}
               >
                 -
               </Button>
@@ -59,7 +62,9 @@ const CartItem = ({ item, quantities, handleIncrement, handleDecrement }) => {
               </Card.Text>
               <Button
                 className="btnPlus"
-                onClick={() => handleIncrement({id: item?.id, note: item?.note})}
+                onClick={() =>
+                  handleIncrement({ id: item?.id, note: item?.note })
+                }
               >
                 +
               </Button>
@@ -77,11 +82,22 @@ const CartItem = ({ item, quantities, handleIncrement, handleDecrement }) => {
           </Row>
           <Row className="contentPriceCart mt-4">
             <Col xs={12} md={12} xl={9} className="contentIcon">
-              <Card.Text onClick={() => handleDeleteCart({id: item?.id})} className="remove">
+              <Card.Text
+                onClick={() => handleDeleteCart({ id: item?.id })}
+                className="remove"
+              >
                 <Trash className="me-2" /> Remove Item
               </Card.Text>
-              <Card.Text onClick={() => handleWishlist({id: item?.id})} className="love">
-                {wishlistStatus ? <HeartFill className="me-2" /> : <Heart className="me-2" /> } Move to Wishlist
+              <Card.Text
+                onClick={() => handleWishlist({ id: item?.id })}
+                className="love"
+              >
+                {item?.wishlist ? (
+                  <HeartFill className="me-2" />
+                ) : (
+                  <Heart className="me-2" />
+                )}{" "}
+                Move to Wishlist
               </Card.Text>
             </Col>
             <Col xs={12} md={12} xl={3} className="p-0">

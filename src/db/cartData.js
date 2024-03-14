@@ -2,7 +2,7 @@ import black from "../assets/img/black.jpg";
 import navy from "../assets/img/navy.jpg";
 import blue from "../assets/img/blue.jpg";
 
-const cartsData = [
+let cartsData = [
   {
     id: 1,
     image: black,
@@ -49,13 +49,13 @@ export const FetchCartData = () => {
 export const UpdateCartData = (itemId) => {
   return new Promise((resolve, reject) => {
     try {
-      const updatedData = cartsData?.map(item => {
+      cartsData = cartsData?.map(item => {
         if (item?.id === itemId) {
           return { ...item, wishlist: !item?.wishlist };
         }
         return item;
       });
-      resolve(updatedData);
+      resolve([...cartsData]);
     } catch (error) {
       reject(error);
     }
@@ -65,8 +65,8 @@ export const UpdateCartData = (itemId) => {
 export const DeleteCartData = (itemId) => {
   return new Promise((resolve, reject) => {
     try {
-      const deletedData = cartsData?.filter(item => item?.id !== itemId);
-      resolve(deletedData);
+      cartsData = cartsData?.filter(item => item?.id !== itemId);
+      resolve([...cartsData]);
     } catch (error) {
       reject(error);
     }
