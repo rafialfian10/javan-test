@@ -1,6 +1,6 @@
-import black from "../assets/img/black.png";
-import navy from "../assets/img/navy.png";
-import blue from "../assets/img/blue.png";
+import black from "../assets/img/black.jpg";
+import navy from "../assets/img/navy.jpg";
+import blue from "../assets/img/blue.jpg";
 
 const cartsData = [
   {
