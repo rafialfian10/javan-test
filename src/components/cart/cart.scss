@@ -21,6 +21,12 @@
     flex-direction: row;
 }
 
+.textNotFound {
+    text-align: center;
+    font-size: 16px;
+    color: grey;
+}
+
 .contentAmount,
 .contentOptional {
     width: 100% !important;

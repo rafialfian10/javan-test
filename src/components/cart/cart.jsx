@@ -24,7 +24,7 @@ const Cart = ({ cartsData }) => {
   };
 
   const handleIncrement = ({ id, note }) => {
-      if (!note || quantities[id] === undefined || quantities[id] < note) {
+    if (!note || quantities[id] === undefined || quantities[id] < note) {
       setQuantities((prevQuantities) => ({
         ...prevQuantities,
         [id]: (prevQuantities[id] || 0) + 1,
@@ -75,20 +75,26 @@ const Cart = ({ cartsData }) => {
             </Form.Text>
           </Col>
           <Col xs={6} md={6} xl={6} className="d-flex justify-content-end">
-            <Button onClick={() => navigate("/tableData")}>History Transaction</Button>
+            <Button onClick={() => navigate("/tableData")}>
+              History Transaction
+            </Button>
           </Col>
         </Row>
         <Col xs={12} md={8} xl={8} className="mb-3">
           <Card className="contentCart">
-            {cartsData?.map((cartData) => (
-              <CartItem
-                key={cartData?.id}
-                item={cartData}
-                quantities={quantities}
-                handleIncrement={handleIncrement}
-                handleDecrement={handleDecrement}
-              />
-            ))}
+            {cartsData?.length > 0 ? (
+              cartsData?.map((cartData) => (
+                <CartItem
+                  key={cartData?.id}
+                  item={cartData}
+                  quantities={quantities}
+                  handleIncrement={handleIncrement}
+                  handleDecrement={handleDecrement}
+                />
+              ))
+            ) : (
+              <Card.Text className="textNotFound">Data not found</Card.Text>
+            )}
           </Card>
         </Col>
         <Col xs={12} md={4} xl={4}>
