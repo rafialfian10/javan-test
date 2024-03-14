@@ -3,8 +3,9 @@ import {
   FAIL_REQUEST,
   GET_CARTS,
   UPDATE_CART,
+  DELETE_CART,
 } from "../ActionType";
-import { FetchCartData, UpdateCartData } from "../../db/cartData";
+import { FetchCartData, UpdateCartData, DeleteCartData } from "../../db/cartData";
 
 export const makeRequest = () => {
   return {
@@ -32,6 +33,12 @@ export const updateCart = () => {
   };
 };
 
+export const deleteCart = () => {
+  return {
+    type: DELETE_CART,
+  };
+};
+
 export const FunctionGetCarts = () => {
   return async (dispatch) => {
     dispatch(makeRequest());
@@ -52,6 +59,20 @@ export const FunctionUpdateCart = (itemId) => {
       dispatch(updateCart(updatedCartItems));
 
       return updatedCartItems;
+    } catch (err) {
+      dispatch(failRequest(err.message));
+    }
+  };
+};
+
+export const FunctionDeleteCart = (itemId) => {
+  return async (dispatch) => {
+    dispatch(makeRequest());
+    try {
+      const deleteCartItems = await DeleteCartData(itemId);
+      dispatch(deleteCart(deleteCartItems));
+
+      return deleteCartItems;
     } catch (err) {
       dispatch(failRequest(err.message));
     }

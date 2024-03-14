@@ -3,6 +3,7 @@ export const FAIL_REQUEST = "FAIL_REQUEST";
 
 export const GET_CARTS = "GET_CARTS";
 export const UPDATE_CART = "UPDATE_CART";
+export const DELETE_CART = "DELETE_CART";
 
 export const GET_TRANSACTIONS = "GET_TRANSACTIONS";
 export const GET_TRANSACTION = "GET_TRANSACTION";

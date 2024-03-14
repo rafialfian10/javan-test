@@ -148,6 +148,9 @@
     align-items: center;
     font-size: 14px;
     color: black;
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .price {
@@ -158,7 +161,7 @@
     color: black;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
     .contentPriceCart {
         flex-direction: column-reverse;
     }
@@ -167,7 +170,9 @@
         font-size: 17px !important;
     }
 
-    .btnPlus, .btnMinus, .amountCart {
+    .btnPlus,
+    .btnMinus,
+    .amountCart {
         width: 30px !important;
         height: 30px !important;
     }
@@ -180,7 +185,8 @@
         margin-bottom: 10px;
     }
 
-    .remove, .love {
-        width: 45%;
+    .remove,
+    .love {
+        width: 45% !important;
     }
 }

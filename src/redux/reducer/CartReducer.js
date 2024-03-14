@@ -3,6 +3,7 @@ import {
   FAIL_REQUEST,
   GET_CARTS,
   UPDATE_CART,
+  DELETE_CART,
 } from "../ActionType";
 
 const initialstateCart = {
@@ -31,6 +32,11 @@ export const CartReducer = (state = initialstateCart, action) => {
         cartsData: action.payload,
       };
     case UPDATE_CART:
+      return {
+        ...state,
+        loadingCart: false,
+      };
+    case DELETE_CART:
       return {
         ...state,
         loadingCart: false,

@@ -81,6 +81,7 @@ const Cart = ({ cartsData }) => {
         <Col xs={12} md={8} xl={8} className="mb-3">
           <Card className="contentCart">
             {cartsData?.map((cartData) => (
+              console.log("data :",cartData),
               <CartItem
                 key={cartData?.id}
                 item={cartData}

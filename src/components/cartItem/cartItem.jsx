@@ -2,12 +2,12 @@ import { useState } from "react";
 import { Button, Card, Col, Row } from "react-bootstrap";
 import { Trash, Heart, HeartFill } from "react-bootstrap-icons";
 import { useDispatch } from "react-redux";
-import { FunctionUpdateCart } from "../../redux/features/CartSlice";
+import { FunctionDeleteCart, FunctionUpdateCart } from "../../redux/features/CartSlice";
 import "./cartItem.scss";
 
 const CartItem = ({ item, quantities, handleIncrement, handleDecrement }) => {
   const dispatch = useDispatch();
-  const [wishlistStatus, setWishlistStatus] = useState(item.wishlist);
+  const [wishlistStatus, setWishlistStatus] = useState(item?.wishlist);
 
   const formattedPrice = `$${(
     item?.price * (quantities[item?.id] || 0)
@@ -19,6 +19,14 @@ const CartItem = ({ item, quantities, handleIncrement, handleDecrement }) => {
       setWishlistStatus(!wishlistStatus);
     } catch (error) {
       console.error("Failed to update wishlist:", error);
+    }
+  }
+
+  const handleDeleteCart = async ({id}) => {
+    try {
+      await dispatch(FunctionDeleteCart(id));
+    } catch (error) {
+      console.error("Failed to delete cart:", error);
     }
   }
 
@@ -68,15 +76,15 @@ const CartItem = ({ item, quantities, handleIncrement, handleDecrement }) => {
             <Card.Text className="size">Size : {item?.size}</Card.Text>
           </Row>
           <Row className="contentPriceCart mt-4">
-            <Col xs={12} md={9} xl={9} className="contentIcon">
-              <Card.Text className="remove">
+            <Col xs={12} md={12} xl={9} className="contentIcon">
+              <Card.Text onClick={() => handleDeleteCart({id: item?.id})} className="remove">
                 <Trash className="me-2" /> Remove Item
               </Card.Text>
               <Card.Text onClick={() => handleWishlist({id: item?.id})} className="love">
                 {wishlistStatus ? <HeartFill className="me-2" /> : <Heart className="me-2" /> } Move to Wishlist
               </Card.Text>
             </Col>
-            <Col xs={12} md={3} xl={3} className="p-0">
+            <Col xs={12} md={12} xl={3} className="p-0">
               <Card.Text className="price">{formattedPrice}</Card.Text>
             </Col>
           </Row>

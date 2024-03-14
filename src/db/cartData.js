@@ -61,3 +61,14 @@ export const UpdateCartData = (itemId) => {
     }
   });
 };
+
+export const DeleteCartData = (itemId) => {
+  return new Promise((resolve, reject) => {
+    try {
+      const deletedData = cartsData?.filter(item => item?.id !== itemId);
+      resolve(deletedData);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
