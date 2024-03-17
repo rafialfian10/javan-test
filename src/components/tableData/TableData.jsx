@@ -84,7 +84,7 @@ const TableDatas = () => {
                   <td>
                     {detailTransaction?.items.map((item, index) => (
                       <p key={index} className="d-inline">
-                        {item?.title},{" "}
+                        {item?.title} ({item.quantity}),{" "}
                       </p>
                     ))}
                   </td>
